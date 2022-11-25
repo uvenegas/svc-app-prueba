@@ -1,4 +1,4 @@
-# Backend PRUEBA-APP orchestrator KIZUNA build
+# Backend PRUEBA-APP build
 
 ### Basic Information
 
