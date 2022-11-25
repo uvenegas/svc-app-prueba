@@ -8,7 +8,7 @@
 ### Set Up
 
 -   Instalar node v14.15.5 usando nvm recomendados
--   Descargar repositorio rama "develop" -- git clone git@github.com:sbpay/svc-app-prueba.git
+-   Descargar repositorio rama "master" -- git clone git@github.com:uvenegas/svc-app-prueba.git
 -   Run in terminal       -- npm i
 -   Run in terminal       -- npm run start:dev
 -   Linsten in http://localhost:8101 
