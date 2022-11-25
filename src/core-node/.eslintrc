@@ -1,0 +1,42 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "extends": ["plugin:@typescript-eslint/recommended", "google", "prettier"],
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "overrides": [
+        {
+            "files": ["bin/*.ts", "lib/*.ts"],
+            "excludedFiles": "*.test.ts",
+            "rules": {
+                "quotes": ["error", "single"]
+            }
+        }
+    ],
+    "rules": {
+        "@typescript-eslint/explicit-member-accessibility": 0,
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/no-parameter-properties": 0,
+        "@typescript-eslint/interface-name-prefix": 0,
+        "@typescript-eslint/explicit-module-boundary-types": 0,
+        "semi": ["error", "always"],
+        "quotes": ["error", "single", { "avoidEscape": true }],
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "object-curly-spacing": ["error", "always"],
+        "max-len": [
+            "error",
+            {
+                "code": 150
+            }
+        ],
+        "@typescript-eslint/no-explicit-any": 1,
+        "@typescript-eslint/no-inferrable-types": [
+            "warn",
+            {
+                "ignoreParameters": true
+            }
+        ],
+        "@typescript-eslint/no-unused-vars": "warn"
+    }
+}

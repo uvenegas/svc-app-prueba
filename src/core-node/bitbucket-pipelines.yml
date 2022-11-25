@@ -1,0 +1,67 @@
+image: atlassian/pipelines-awscli
+
+definitions:
+    steps:
+        - step: &Install-dep
+              name: Install Dependencies
+              image: node:12.13.0
+              caches:
+                  - node
+              script:
+                  - npm install --quiet
+        - step: &Lint-step
+              name: Run Lint Rules
+              image: node:12.13.0
+              caches:
+                  - node
+              script:
+                  - npm install --quiet
+                  - npm run lint
+        - step: &Test-step
+              name: Run tests
+              image: node:12.13.0
+              caches:
+                  - node
+              script:
+                  - npm install --quiet
+                  - npm run test
+        - step: &Build-step
+              name: Run build
+              image: node:12.13.0
+              caches:
+                  - node
+              script:
+                  - npm install --quiet
+                  - npm run tsc
+
+pipelines:
+    default:
+        - step: *Install-dep
+        - step: *Lint-step
+        - step: *Test-step
+        - step: *Build-step
+    branches:
+        labs:
+            - step: *Install-dep
+            - step: *Lint-step
+            - step: *Test-step
+            - step: *Build-step
+
+        staging:
+            - step: *Install-dep
+            - step: *Lint-step
+            - step: *Test-step
+            - step: *Build-step
+        master:
+            - step: *Install-dep
+            - step: *Lint-step
+            - step: *Test-step
+            - step: *Build-step
+            - step:
+                  name: Tag version
+                  image: atlassian/default-image:2
+                  script:
+                      - git remote set-url origin https://${GIT_USER}:${GIT_PASS}@bitbucket.org/matikard/core-node.git
+                      - dt=$(date '+%Y-%m-%d_%H%M');
+                      - git tag -a $dt ${BITBUCKET_COMMIT} -m "version ${BITBUCKET_BUILD_NUMBER}"
+                      - git push origin --tags

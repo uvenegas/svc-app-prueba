@@ -1,0 +1,9 @@
+{
+    "environment": "development",
+    "projectName": "svc-prueba-app",
+    "rootPath": "/api",
+    "appPort": 8089,
+    "operations": {},
+    "integrations": {}
+
+}

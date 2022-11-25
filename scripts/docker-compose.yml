@@ -1,0 +1,51 @@
+version: '3.7'
+services:
+    trx:
+        image: postgres
+        volumes:
+            - postgres-data-trx:/var/lib/postgresql/data-trx
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_DB=trx
+            - POSTGRES_USER=admin
+            - POSTGRES_PASSWORD=Password01.
+    mdd:
+        image: postgres
+        volumes:
+            - postgres-data-mdd:/var/lib/postgresql/data-mdd
+        ports:
+            - 5433:5432
+        environment:
+            - POSTGRES_DB=mdd
+            - POSTGRES_USER=admin
+            - POSTGRES_PASSWORD=Password01.
+    business:
+        image: postgres
+        volumes:
+            - postgres-data-business:/var/lib/postgresql/data-business
+        ports:
+            - 5434:5432
+        environment:
+            - POSTGRES_DB=business
+            - POSTGRES_USER=admin
+            - POSTGRES_PASSWORD=Password01.
+    equifax:
+        image: postgres
+        volumes:
+            - postgres-data-equifax:/var/lib/postgresql/data-equifax
+        ports:
+            - 5435:5432
+        environment:
+            - POSTGRES_DB=equifax
+            - POSTGRES_USER=admin
+            - POSTGRES_PASSWORD=Password01.
+volumes:
+    postgres-data-trx:
+        external: false
+    postgres-data-mdd:
+        external: false
+    postgres-data-business:
+        external: false
+    postgres-data-equifax:
+        external: false
