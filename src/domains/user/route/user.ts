@@ -8,6 +8,8 @@ import { validationSchemaMiddleware } from 'src/core-node/infrastructure/middlew
 import { ESchemaMiddleware } from 'src/core-node/infrastructure/enums/ESchemaMiddleware';
 import { IUser } from '@domains/user/interface/IUser';
 import { UserController } from '@domains/user/controller/UserController';
+import { UserSchemaRequest } from '@domains/user/validation/UserSchemaRequest.schema';
+import { LoginSchemaRequest } from '@domains/user/validation/LoginSchemaRequest.schema';
 
 // eslint-disable-next-line new-cap
 const router = Router();
@@ -15,7 +17,7 @@ const basePathClient = '/';
 router
     .post(`${basePathClient}signup`, async (req: Request, resp: Response, next: NextFunction) => {
         try {
-            // await validationSchemaMiddleware(req, TransactionSchema, ESchemaMiddleware.body);
+            await validationSchemaMiddleware(req, UserSchemaRequest, ESchemaMiddleware.body);
             const userRequest: IUser.IRequestUser = req.body;
             const userResponse = await UserController.postUser(userRequest);
             const response = formatResponse(EHttpStatus.Success, 'Success', userResponse) as IResponse<IUser.IResponseUser>;
@@ -27,8 +29,8 @@ router
     })
     .post(`${basePathClient}login`, async (req: Request, resp: Response, next: NextFunction) => {
         try {
-            // await validationSchemaMiddleware(req, TransactionSchema, ESchemaMiddleware.body);
-            const loginRequest: IUser.IRequestUser = req.body;
+            await validationSchemaMiddleware(req, LoginSchemaRequest, ESchemaMiddleware.body);
+            const loginRequest: IUser.IRequestLogin = req.body;
             const loginResponse = await UserController.loginUser(loginRequest);
             const response = formatResponse(EHttpStatus.Success, 'Success', loginResponse) as IResponse<IUser.IResponseUser>;
             sendResponse(resp, response, next);

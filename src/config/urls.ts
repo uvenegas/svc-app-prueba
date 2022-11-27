@@ -1,5 +1,21 @@
+import { MsConfig } from '@msConfig/MsConfig';
+
 const backend = {
-    clients: {},
+    services: {},
 };
 
-export { backend };
+const urlHealthServices = {
+    drugs: {
+        drugsHealth: `${MsConfig.config.rootPath}/check-balance/health`,
+    },
+
+    user: {
+        userHealth: `${MsConfig.config.rootPath}/health`,
+    },
+
+    vaccination: {
+        vaccinationHealth: `${MsConfig.config.rootPath}/health`,
+    },
+};
+
+export { backend, urlHealthServices };

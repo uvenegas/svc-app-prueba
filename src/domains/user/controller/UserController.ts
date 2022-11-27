@@ -6,23 +6,21 @@ import { UserServices } from '@domains/user/service/UserServices';
  */
 export class UserController {
     /**
-     * Post Drugs
+     * Post User
      * @param {IUser.IRequestUser} userRequest
-     * @return {Promise<IDrugs.IResponseDrugs>}
      */
-    public static async postUser(userRequest: IUser.IRequestUser): Promise<IUser.IResponseUser> {
-        const user = await UserServices.postDrugs(userRequest);
+    public static async postUser(userRequest: IUser.IRequestUser){
+        const user = await UserServices.postUser(userRequest);
 
         return user;
     }
 
     /**
-     * Post Drugs
-     * @param {IUser.IRequestUser} loginRequest
-     * @return {Promise<IDrugs.IResponseDrugs>}
+     * Post Login
+     * @param {IUser.IRequestLogin} loginRequest
      */
-    public static async loginUser(loginRequest: IUser.IRequestUser): Promise<IUser.IResponseUser> {
-        const login = await UserServices.postDrugs(loginRequest);
+    public static async loginUser(loginRequest: IUser.IRequestLogin){
+        const login = await UserServices.postLogin(loginRequest);
 
         return login;
     }

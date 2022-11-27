@@ -8,6 +8,11 @@ export namespace IUser {
         password: string;
     }
 
+    export interface IRequestLogin {
+        email: string;
+        password: string;
+    }
+
     export interface IResponseUser {
         id: number;
         name: string;

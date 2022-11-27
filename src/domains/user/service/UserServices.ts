@@ -1,5 +1,4 @@
-import { RulesEntity } from '@domains/drugs/entity/RulesEntity';
-import { IConditionEnginer } from '@domains/drugs/interface/IConditionEnginer';
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { IUser } from '@domains/user/interface/IUser';
 
 /**
@@ -7,14 +6,62 @@ import { IUser } from '@domains/user/interface/IUser';
  */
 export class UserServices {
     /**
-     * Get Config
-     * @param {IDrugs.IRequestDrugs} drugsRequest
-     * @return {Promise<IConditionEnginer>}
+     * Post User
+     * @param {IUser.IRequestUser} userRequest
      */
-    public static async postDrugs(drugsRequest: IUser.IRequestUser): Promise<IConditionEnginer.IRules | null> {
-        return await RulesEntity.findOne({ type: type }).then(function (doc) {
-            if (!doc) return null;
-            return doc;
-        });
+    public static async postUser(userRequest: IUser.IRequestUser){
+        const { Client } = require('pg');
+        const dotenv = require('dotenv');
+        dotenv.config();
+
+        const connectDb = async () => {
+            const client = new Client({
+                user: process.env.PGUSER,
+                host: process.env.PGHOST,
+                database: process.env.PGDATABASE,
+                password: process.env.PGPASSWORD,
+                port: process.env.PGPORT
+            });
+
+            await client.connect();
+            const res = await client.query('insert into user(id, name, email, password) values(',
+                userRequest.id,',',
+                userRequest.name,',',
+                userRequest.email,',',
+                userRequest.password,')');
+                
+            console.log(res);
+            await client.end();
+        };
+
+        connectDb();
+    }
+
+    /**
+     * Post User
+     * @param {IUser.IRequestLogin} loginRequest
+     */
+    public static async postLogin(loginRequest: IUser.IRequestLogin){
+        const { Client } = require('pg');
+        const dotenv = require('dotenv');
+        dotenv.config();
+
+        const connectDb = async () => {
+            const client = new Client({
+                user: process.env.PGUSER,
+                host: process.env.PGHOST,
+                database: process.env.PGDATABASE,
+                password: process.env.PGPASSWORD,
+                port: process.env.PGPORT
+            });
+
+            await client.connect();
+            const res = await client.query('select email, password from user where email = ',loginRequest.email,' and', 'password = ',loginRequest.password);
+                
+            console.log(res);
+            await client.end();
+        };
+
+        connectDb();
     }
 }

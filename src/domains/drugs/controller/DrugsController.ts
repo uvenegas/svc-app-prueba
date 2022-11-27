@@ -10,7 +10,7 @@ export class DrugsController {
      * @param {IDrugs.IRequestDrugs} drugsRequest
      * @return {Promise<IDrugs.IResponseDrugs>}
      */
-    public static async postDrugs(drugsRequest: IDrugs.IRequestDrugs): Promise<IDrugs.IResponseDrugs> {
+    public static async postDrugs(drugsRequest: IDrugs.IRequestDrugs){
         const drugs = await DrugsServices.postDrugs(drugsRequest);
 
         return drugs;
@@ -18,12 +18,12 @@ export class DrugsController {
 
     /**
      * Put Drugs
-     * @param {number} idVaccination
+     * @param {number} idDrugs
      * @param {IDrugs.IRequestDrugs} drugsRequest
      * @return {Promise<IDrugs.IResponseDrugs>}
      */
-    public static async putDrugs(idVaccination: number, drugsRequest: IDrugs.IRequestDrugs): Promise<IDrugs.IResponseDrugs> {
-        const drugs = await DrugsServices.putDrugs(drugsRequest);
+    public static async putDrugs(idDrugs: number, drugsRequest: IDrugs.IRequestDrugs){
+        const drugs = await DrugsServices.putDrugs(idDrugs, drugsRequest);
 
         return drugs;
     }
@@ -32,7 +32,7 @@ export class DrugsController {
      * Get Drugs
      * @return {Promise<IDrugs.IResponseDrugs>}
      */
-    public static async getDrugs(): Promise<IDrugs.IResponseDrugs> {
+    public static async getDrugs() {
         const drugs = await DrugsServices.getDrugs();
 
         return drugs;
@@ -43,7 +43,7 @@ export class DrugsController {
      * @param {number} idDrugs
      * @return {Promise<IDrugs.IResponseDrugs>}
      */
-    public static async deleteDrugs(idDrugs: number): Promise<IDrugs.IResponseDrugs> {
+    public static async deleteDrugs(idDrugs: number) {
         const drugs = await DrugsServices.deleteDrugs(idDrugs);
 
         return drugs;

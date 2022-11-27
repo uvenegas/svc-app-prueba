@@ -1,5 +1,5 @@
 {
-    "name": "svc-config-channel",
+    "name": "svc-app-prueba",
     "version": "1.0.0",
     "description": "servicio validacion version",
     "module": "CommonJS",
@@ -48,8 +48,8 @@
         "log4js": "^6.3.0",
         "module-alias": "^2.2.2",
         "moment": "^2.29.1",
-        "mongoose": "^6.5.1",
         "node-schedule": "^2.0.0",
+        "pg": "^8.8.0",
         "uuid": "^8.3.2",
         "winston": "^3.3.3",
         "xmlbuilder2": "^3.0.2"

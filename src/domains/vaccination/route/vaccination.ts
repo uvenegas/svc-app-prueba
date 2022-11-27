@@ -7,7 +7,9 @@ import { IResponse } from 'src/core-node/infrastructure/interfaces/IResponse';
 import { validationSchemaMiddleware } from 'src/core-node/infrastructure/middleware/validationSchema/validationSchema.middleware';
 import { ESchemaMiddleware } from 'src/core-node/infrastructure/enums/ESchemaMiddleware';
 import { VaccinationController } from '@domains/vaccination/controller/VaccinationController';
-import { IVaccination } from '../interface/IVaccination';
+import { IVaccination } from '@domains/vaccination/interface/IVaccination';
+import { VaccinationSchemaRequest } from '@domains/vaccination/validation/VaccinationSchemaRequest.schema';
+import { IdSchemaRequest } from '@domains/vaccination/validation/IdSchemaRequest.schema';
 
 // eslint-disable-next-line new-cap
 const router = Router();
@@ -15,7 +17,7 @@ const basePathClient = '/';
 router
     .post(`${basePathClient}vaccination`, async (req: Request, resp: Response, next: NextFunction) => {
         try {
-            // await validationSchemaMiddleware(req, TransactionSchema, ESchemaMiddleware.body);
+            await validationSchemaMiddleware(req, VaccinationSchemaRequest, ESchemaMiddleware.body);
             const vaccionationRequest: IVaccination.IRequestVaccination = req.body;
             const transactionResponse = await VaccinationController.postVaccination(vaccionationRequest);
             const response = formatResponse(EHttpStatus.Success, 'Success', transactionResponse) as IResponse<IVaccination.IResponseVaccination>;
@@ -27,6 +29,8 @@ router
     })
     .put(`${basePathClient}vaccination/:id`, async (req: Request, resp: Response, next: NextFunction) => {
         try {
+            await validationSchemaMiddleware(req, VaccinationSchemaRequest, ESchemaMiddleware.body);
+            await validationSchemaMiddleware(req, IdSchemaRequest, ESchemaMiddleware.params);
             const idVaccination = Number(req.params.id);
             const vaccionationRequest: IVaccination.IRequestVaccination = req.body;
             const vaccionationResponse = await VaccinationController.putVaccination(idVaccination, vaccionationRequest);
@@ -50,7 +54,7 @@ router
     })
     .delete(`${basePathClient}vaccination/:id`, async (req: Request, resp: Response, next: NextFunction) => {
         try {
-            // await validationSchemaMiddleware(req, TransactionSchema, ESchemaMiddleware.body);
+            await validationSchemaMiddleware(req, IdSchemaRequest, ESchemaMiddleware.params);
             const idVaccination = Number(req.params.id);
             const vaccionationResponse = await VaccinationController.deleteVaccination(idVaccination);
             const response = formatResponse(EHttpStatus.Success, 'Success', vaccionationResponse) as IResponse<IVaccination.IResponseVaccination>;
