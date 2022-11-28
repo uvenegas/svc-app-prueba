@@ -8,7 +8,7 @@ describe('Test vaccination', () => {
         const requestTest: IVaccination.IRequestVaccination = {
             id: 123,
             name: 'adrenalina',
-            drug_id: true,
+            drug_id: 123,
             dose: 123,
             date: new Date,
         };
@@ -19,7 +19,7 @@ describe('Test vaccination', () => {
             payload: {
                 id: 123,
                 name: 'adrenalina',
-                drug_id: true,
+                drug_id: 123,
                 dose: 123,
                 date: new Date,
             },
