@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Router, Request, Response, NextFunction } from 'express';
-import { EHttpStatus } from 'src/core-node/infrastructure/enums/EHttpStatus';
-import { formatError, formatResponse, sendResponse } from 'src/core-node/infrastructure/providers/ErrorHandling/errorHandler';
-import { IResponse } from 'src/core-node/infrastructure/interfaces/IResponse';
-import { validationSchemaMiddleware } from 'src/core-node/infrastructure/middleware/validationSchema/validationSchema.middleware';
-import { ESchemaMiddleware } from 'src/core-node/infrastructure/enums/ESchemaMiddleware';
+import { EHttpStatus } from '@core/enums/EHttpStatus';
+import { formatError, formatResponse, sendResponse } from '@core/providers/ErrorHandling/errorHandler';
+import { IResponse } from '@core/interfaces/IResponse';
+import { validationSchemaMiddleware } from '@core/middleware/validationSchema/validationSchema.middleware';
+import { ESchemaMiddleware } from '@core/enums/ESchemaMiddleware';
 import { VaccinationController } from '@domains/vaccination/controller/VaccinationController';
 import { IVaccination } from '@domains/vaccination/interface/IVaccination';
 import { VaccinationSchemaRequest } from '@domains/vaccination/validation/VaccinationSchemaRequest.schema';
@@ -18,9 +18,9 @@ router
     .post(`${basePathClient}vaccination`, async (req: Request, resp: Response, next: NextFunction) => {
         try {
             await validationSchemaMiddleware(req, VaccinationSchemaRequest, ESchemaMiddleware.body);
-            const vaccionationRequest: IVaccination.IRequestVaccination = req.body;
-            const transactionResponse = await VaccinationController.postVaccination(vaccionationRequest);
-            const response = formatResponse(EHttpStatus.Success, 'Success', transactionResponse) as IResponse<IVaccination.IResponseVaccination>;
+            const vaccinationRequest: IVaccination.IRequestVaccination = req.body;
+            const vaccinationResponse = await VaccinationController.postVaccination(vaccinationRequest);
+            const response = formatResponse(EHttpStatus.Success, 'Success', vaccinationResponse) as IResponse<IVaccination.IResponseVaccination>;
             sendResponse(resp, response, next);
         } catch (error) {
             const handledError = formatError(error);
@@ -32,9 +32,9 @@ router
             await validationSchemaMiddleware(req, VaccinationSchemaRequest, ESchemaMiddleware.body);
             await validationSchemaMiddleware(req, IdSchemaRequest, ESchemaMiddleware.params);
             const idVaccination = Number(req.params.id);
-            const vaccionationRequest: IVaccination.IRequestVaccination = req.body;
-            const vaccionationResponse = await VaccinationController.putVaccination(idVaccination, vaccionationRequest);
-            const response = formatResponse(EHttpStatus.Success, 'Success', vaccionationResponse) as IResponse<IVaccination.IRequestVaccination>;
+            const vaccinationRequest: IVaccination.IRequestVaccination = req.body;
+            const vaccinationResponse = await VaccinationController.putVaccination(idVaccination, vaccinationRequest);
+            const response = formatResponse(EHttpStatus.Success, 'Success', vaccinationResponse) as IResponse<IVaccination.IRequestVaccination>;
             sendResponse(resp, response, next);
         } catch (error) {
             const handledError = formatError(error);
@@ -43,10 +43,10 @@ router
     })
     .get(`${basePathClient}vaccination`, async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const config = await VaccinationController.getVaccination();
+            const vaccinationResponse = await VaccinationController.getVaccination();
 
-            const dataResponse = formatResponse(EHttpStatus.Success, 'success', config) as IResponse<IVaccination.IResponseVaccination>;
-            sendResponse(res, dataResponse, next);
+            const response = formatResponse(EHttpStatus.Success, 'success', vaccinationResponse) as IResponse<IVaccination.IResponseVaccination>;
+            sendResponse(res, response, next);
         } catch (error) {
             const handledError = formatError(error);
             sendResponse(res, handledError, next);
@@ -56,8 +56,8 @@ router
         try {
             await validationSchemaMiddleware(req, IdSchemaRequest, ESchemaMiddleware.params);
             const idVaccination = Number(req.params.id);
-            const vaccionationResponse = await VaccinationController.deleteVaccination(idVaccination);
-            const response = formatResponse(EHttpStatus.Success, 'Success', vaccionationResponse) as IResponse<IVaccination.IResponseVaccination>;
+            const vaccinationResponse = await VaccinationController.deleteVaccination(idVaccination);
+            const response = formatResponse(EHttpStatus.Success, 'Success', vaccinationResponse) as IResponse<IVaccination.IResponseVaccination>;
             sendResponse(resp, response, next);
         } catch (error) {
             const handledError = formatError(error);

@@ -22,7 +22,7 @@ export class VaccinationController {
      * @param {IVaccination.IRequestVaccination} vaccinationRequest
      */
     public static async putVaccination(idVaccination: number, vaccinationRequest: IVaccination.IRequestVaccination){
-        const vaccination = await VaccinationServices.putVaccination(vaccinationRequest);
+        const vaccination = await VaccinationServices.putVaccination(idVaccination, vaccinationRequest);
 
         return vaccination;
     }
@@ -31,7 +31,7 @@ export class VaccinationController {
      * Get Vaccination
      * @return {Promise<IVaccination.IResponseVaccination>}
      */
-    public static async getVaccination(): Promise<IVaccination.IResponseVaccination> {
+    public static async getVaccination() {
         const vaccination = await VaccinationServices.getVaccination();
 
         return vaccination;

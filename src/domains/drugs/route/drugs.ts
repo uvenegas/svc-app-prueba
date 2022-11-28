@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Router, Request, Response, NextFunction } from 'express';
-import { EHttpStatus } from 'src/core-node/infrastructure/enums/EHttpStatus';
-import { formatError, formatResponse, sendResponse } from 'src/core-node/infrastructure/providers/ErrorHandling/errorHandler';
-import { IResponse } from 'src/core-node/infrastructure/interfaces/IResponse';
+import { EHttpStatus } from '@core/enums/EHttpStatus';
+import { formatError, formatResponse, sendResponse } from '@core/providers/ErrorHandling/errorHandler';
+import { IResponse } from '@core/interfaces/IResponse';
 import { DrugsController } from '@domains/drugs/controller/DrugsController';
 import { IDrugs } from '@domains/drugs/interface/IDrugs';
-import { validationSchemaMiddleware } from 'src/core-node/infrastructure/middleware/validationSchema/validationSchema.middleware';
-import { ESchemaMiddleware } from 'src/core-node/infrastructure/enums/ESchemaMiddleware';
+import { validationSchemaMiddleware } from '@core/middleware/validationSchema/validationSchema.middleware';
+import { ESchemaMiddleware } from '@core/enums/ESchemaMiddleware';
 import { DrugsSchemaRequest } from '@domains/drugs/validation/DrugsSchemaRequest.schema';
 import { IdSchemaRequest } from '@domains/drugs/validation/IdSchemaRequest.schema';
 
@@ -29,8 +29,8 @@ router
     })
     .put(`${basePath}drugs/:id`, async (req: Request, resp: Response, next: NextFunction) => {
         try {
-            await validationSchemaMiddleware(req, IdSchemaRequest, ESchemaMiddleware.params);
             await validationSchemaMiddleware(req, DrugsSchemaRequest, ESchemaMiddleware.body);
+            await validationSchemaMiddleware(req, IdSchemaRequest, ESchemaMiddleware.params);
             const idDrugs = Number(req.params.id);
             const drugsRequest: IDrugs.IRequestDrugs = req.body;
             const drugsResponse = await DrugsController.putDrugs(idDrugs, drugsRequest);

@@ -4,9 +4,9 @@
  */
 import { api } from './api';
 import { App } from '@modules/App';
-import { MsConfig } from '@msConfig/MsConfig';
 import { HealthServices } from '@shared/services/HealthServices';
 import { Logger } from '@core/logger/Logger';
+import { MsConfig } from '@msConfig/MsConfig';
 
 /**
  * default port to listen

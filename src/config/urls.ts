@@ -6,15 +6,15 @@ const backend = {
 
 const urlHealthServices = {
     drugs: {
-        drugsHealth: `${MsConfig.config.rootPath}/check-balance/health`,
+        drugsHealth: `${MsConfig.config.rootPath}/drugs/health`,
     },
 
     user: {
-        userHealth: `${MsConfig.config.rootPath}/health`,
+        userHealth: `${MsConfig.config.rootPath}/user/health`,
     },
 
     vaccination: {
-        vaccinationHealth: `${MsConfig.config.rootPath}/health`,
+        vaccinationHealth: `${MsConfig.config.rootPath}/vaccination/health`,
     },
 };
 

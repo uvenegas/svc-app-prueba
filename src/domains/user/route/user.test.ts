@@ -1,40 +1,76 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import express, { Router, Request, Response, NextFunction } from 'express';
-import { ConfigController } from '@domains/drugs/controller/DrugsController';
-import { EHttpStatus } from 'src/core-node/infrastructure/enums/EHttpStatus';
+import { UserController } from '@domains/user/controller/UserController';
+import { EHttpStatus } from '@core/enums/EHttpStatus';
 import request from 'supertest';
 import bodyParser from 'body-parser';
-import { ConfigRoutes } from '@domains/drugs/route';
-import { IConditionEnginerResponse } from '@domains/drugs/interface/IConditionEnginerResponse';
-import { IResponse } from 'src/core-node/infrastructure/interfaces/IResponse';
+import { UserRoutes } from '@domains/user/route';
+import { IResponse } from '@core/interfaces/IResponse';
+import { IUser } from '@domains/user/interface/IUser';
 
 const app = express();
 app.use(bodyParser.json());
-app.use('', ConfigRoutes);
-const basePath = '/rules-engine';
+app.use('', UserRoutes);
+const basePath = '/';
 
-describe('Test config controller', () => {
-    describe('Test get All Config', () => {
-        const responseTestSuccess: IResponse<IConditionEnginerResponse.IResponseEnginer> = {
+describe('Test user controller', () => {
+    describe('Test post user', () => {
+        const requestTest: IUser.IRequestUser = {
+            id: 123,
+            name: 'adrenalina',
+            email: 'hola@gmail.com',
+            password: '123',
+        };
+
+        const responseTestSuccess: IResponse<IUser.IResponseUser> = {
             statusCode: 200,
             message: 'success',
             payload: {
-                valid: true,
-                metadata: {
-                    isOptional: true,
-                },
+                id: 123,
+                name: 'adrenalina',
+                email: 'hola@gmail.com',
+                password: '123'
             },
         };
-        test('should return a success get a config', async () => {
-            ConfigController.getConfigApp = jest.fn().mockReturnValue(responseTestSuccess);
-            const resp = await request(app).get(`${basePath}/ios/modal-update/4.0.0`);
+        test('should return a success post a user', async () => {
+            UserController.postUser = jest.fn().mockReturnValue(responseTestSuccess);
+            const resp = await request(app).post(`${basePath}signup`).send(requestTest);
             expect(resp.body.statusCode).toEqual(EHttpStatus.Success);
         });
 
         test('should return a error', async () => {
-            ConfigController.getConfigApp = jest.fn().mockRejectedValueOnce('');
-            const resp = await request(app).get(`${basePath}/ios/modal-update/4.0.0`);
+            UserController.postUser = jest.fn().mockRejectedValueOnce('');
+            const resp = await request(app).post(`${basePath}signup`).send(requestTest);
+            expect(resp.body.statusCode).toEqual(EHttpStatus.RunTimeError);
+        });
+    });
+
+    describe('Test post login', () => {
+        const requestTest: IUser.IRequestLogin = {
+            email: 'hola@gmail.com',
+            password: '123',
+        };
+
+        const responseTestSuccess: IResponse<IUser.IResponseUser> = {
+            statusCode: 200,
+            message: 'success',
+            payload: {
+                id: 123,
+                name: 'adrenalina',
+                email: 'hola@gmail.com',
+                password: '123'
+            },
+        };
+        test('should return a success put a user', async () => {
+            UserController.loginUser = jest.fn().mockReturnValue(responseTestSuccess);
+            const resp = await request(app).put(`${basePath}login`).send(requestTest);
+            expect(resp.body.statusCode).toEqual(EHttpStatus.Success);
+        });
+
+        test('should return a error', async () => {
+            UserController.loginUser = jest.fn().mockRejectedValueOnce('');
+            const resp = await request(app).put(`${basePath}login`).send(requestTest);
             expect(resp.body.statusCode).toEqual(EHttpStatus.RunTimeError);
         });
     });

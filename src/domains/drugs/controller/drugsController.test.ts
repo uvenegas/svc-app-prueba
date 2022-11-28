@@ -1,50 +1,55 @@
-import { ThrowError } from 'src/core-node/infrastructure/providers/ErrorHandling/ThrowError';
-import { ConfigServices } from '@domains/drugs/service/DrugsServices';
-import { IConditionEnginer } from '@domains/drugs/interface/IConditionEnginer';
-import { ConfigController } from '@domains/drugs/controller/DrugsController';
-import { IConditionEnginerResponse } from '@domains/drugs/interface/IConditionEnginerResponse';
+import { DrugsServices } from '@domains/drugs/service/DrugsServices';
+import { DrugsController } from '@domains/drugs/controller/DrugsController';
+import { IDrugs } from '@domains/drugs/interface/IDrugs';
+import { IResponse } from '@core/interfaces/IResponse';
 
-describe('Test Get  Document  Dec5', () => {
-    const responseGetTest: IConditionEnginer.IRules = {
-        type: 'modal-update',
-        platforms: [
-            {
-                name: 'ios',
-                all: {
-                    fact: 'versionApp',
-                    operator: 'lessThan',
-                    value: 400,
-                },
-                metadata: {
-                    isOptional: true,
-                },
+describe('Test drugs', () => {
+    describe('Test drugs', () => {
+        const requestTest: IDrugs.IRequestDrugs = {
+                id: 123,
+                name: 'adrenalina',
+                approved: true,
+                min_dose: 123,
+                max_dose: 123,
+                avaliable_at: new Date,
+        };
+
+        const responseTestSuccess: IResponse<IDrugs.IResponseDrugs> = {
+            statusCode: 200,
+            message: 'success',
+            payload: {
+                id: 123,
+                name: 'adrenalina',
+                approved: true,
+                min_dose: 123,
+                max_dose: 123,
+                avaliable_at: new Date,
             },
-        ],
-    };
+        };
 
-    const responseGetErrorNoPlatformsTest: unknown = {
-        type: 'moda-update',
-    };
-
-    const responseServiceTest: IConditionEnginerResponse.IResponseEnginer = {
-        valid: true,
-        metadata: {
-            isOptional: true,
-        },
-    };
-
-    test('Get configApp - Success', async () => {
-        ConfigServices.getConfigApp = jest.fn().mockReturnValueOnce(responseGetTest);
-        const resp = await ConfigController.getConfigApp('ios', 'modal-update', '3.0.0');
-        expect(resp).toStrictEqual(responseServiceTest);
-    });
-
-    test('Get configApp - noContent', async () => {
-        const spy = jest.spyOn(ThrowError, 'noContent');
-
-        ConfigServices.getConfigApp = jest.fn().mockResolvedValue(responseGetErrorNoPlatformsTest);
-        await ConfigController.getConfigApp('ios', 'modal-update', '3.0.0').catch(() => {
-            expect(spy).toEqual(ThrowError.noContent);
+        test('Post Drugs - Success', async () => {
+            DrugsServices.postDrugs = jest.fn().mockReturnValueOnce(responseTestSuccess);
+            const resp = await DrugsController.postDrugs(requestTest);
+            expect(resp).toStrictEqual(responseTestSuccess);
         });
+
+        test('Put Drugs - Success', async () => {
+            DrugsServices.putDrugs = jest.fn().mockReturnValueOnce(responseTestSuccess);
+            const resp = await DrugsController.putDrugs(123, requestTest);
+            expect(resp).toStrictEqual(responseTestSuccess);
+        });
+
+        test('Get Drugs - Success', async () => {
+            DrugsServices.getDrugs = jest.fn().mockReturnValueOnce(responseTestSuccess);
+            const resp = await DrugsController.getDrugs();
+            expect(resp).toStrictEqual(responseTestSuccess);
+        });
+
+        test('Delete Drugs - Success', async () => {
+            DrugsServices.deleteDrugs = jest.fn().mockReturnValueOnce(responseTestSuccess);
+            const resp = await DrugsController.deleteDrugs(123);
+            expect(resp).toStrictEqual(responseTestSuccess);
+        });
+   
     });
 });

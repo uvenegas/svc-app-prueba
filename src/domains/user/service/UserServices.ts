@@ -41,7 +41,7 @@ export class UserServices {
      * Post User
      * @param {IUser.IRequestLogin} loginRequest
      */
-    public static async postLogin(loginRequest: IUser.IRequestLogin){
+    public static async loginUser(loginRequest: IUser.IRequestLogin){
         const { Client } = require('pg');
         const dotenv = require('dotenv');
         dotenv.config();

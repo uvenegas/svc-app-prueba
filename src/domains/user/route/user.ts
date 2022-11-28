@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Router, Request, Response, NextFunction } from 'express';
-import { EHttpStatus } from 'src/core-node/infrastructure/enums/EHttpStatus';
-import { formatError, formatResponse, sendResponse } from 'src/core-node/infrastructure/providers/ErrorHandling/errorHandler';
-import { IResponse } from 'src/core-node/infrastructure/interfaces/IResponse';
-import { validationSchemaMiddleware } from 'src/core-node/infrastructure/middleware/validationSchema/validationSchema.middleware';
-import { ESchemaMiddleware } from 'src/core-node/infrastructure/enums/ESchemaMiddleware';
+import { EHttpStatus } from '@core/enums/EHttpStatus';
+import { formatError, formatResponse, sendResponse } from '@core/providers/ErrorHandling/errorHandler';
+import { IResponse } from '@core/interfaces/IResponse';
+import { validationSchemaMiddleware } from '@core/middleware/validationSchema/validationSchema.middleware';
+import { ESchemaMiddleware } from '@core/enums/ESchemaMiddleware';
 import { IUser } from '@domains/user/interface/IUser';
 import { UserController } from '@domains/user/controller/UserController';
 import { UserSchemaRequest } from '@domains/user/validation/UserSchemaRequest.schema';

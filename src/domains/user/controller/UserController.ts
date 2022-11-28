@@ -20,7 +20,7 @@ export class UserController {
      * @param {IUser.IRequestLogin} loginRequest
      */
     public static async loginUser(loginRequest: IUser.IRequestLogin){
-        const login = await UserServices.postLogin(loginRequest);
+        const login = await UserServices.loginUser(loginRequest);
 
         return login;
     }
