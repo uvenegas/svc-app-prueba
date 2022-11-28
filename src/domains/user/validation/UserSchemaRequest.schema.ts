@@ -5,7 +5,7 @@ import { JSONSchemaType } from 'ajv';
 export const UserSchemaRequest: JSONSchemaType<UserRequest> = {
     type: 'object',
     properties: {
-        id: { type: 'number', isNotEmpty: true },
+        id: { type: 'number' },
         name: { type: 'string', isNotEmpty: true },
         email: { type: 'string', isNotEmpty: true },
         password: { type: 'string', isNotEmpty: true },

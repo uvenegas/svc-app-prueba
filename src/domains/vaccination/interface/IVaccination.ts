@@ -4,7 +4,7 @@ export namespace IVaccination {
     export interface IRequestVaccination {
         id: number;
         name: string;
-        drug_id: boolean;
+        drug_id: number;
         dose: number;
         date: Date;
     }
@@ -12,7 +12,7 @@ export namespace IVaccination {
     export interface IResponseVaccination {
         id: number;
         name: string;
-        drug_id: boolean;
+        drug_id: number;
         dose: number;
         date: Date;
     }

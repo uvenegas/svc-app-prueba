@@ -5,11 +5,11 @@ import { JSONSchemaType } from 'ajv';
 export const DrugsSchemaRequest: JSONSchemaType<DrugsRequest> = {
     type: 'object',
     properties: {
-        id: { type: 'number', isNotEmpty: true },
+        id: { type: 'number' },
         name: { type: 'string', isNotEmpty: true },
-        approved: { type: 'boolean', isNotEmpty: true },
-        min_dose: { type: 'number', isNotEmpty: true },
-        max_dose: { type: 'number', isNotEmpty: true },
+        approved: { type: 'boolean' },
+        min_dose: { type: 'number' },
+        max_dose: { type: 'number' },
         avaliable_at: { type: 'string', isNotEmpty: true },
     },
     required: ['id', 'name', 'approved', 'min_dose', 'max_dose', 'avaliable_at'],

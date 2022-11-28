@@ -5,10 +5,10 @@ import { JSONSchemaType } from 'ajv';
 export const VaccinationSchemaRequest: JSONSchemaType<VaccinationRequest> = {
     type: 'object',
     properties: {
-        id: { type: 'number', isNotEmpty: true },
+        id: { type: 'number' },
         name: { type: 'string', isNotEmpty: true },
-        drug_id: { type: 'boolean', isNotEmpty: true },
-        dose: { type: 'number', isNotEmpty: true },
+        drug_id: { type: 'number' },
+        dose: { type: 'number' },
         date: { type: 'string', isNotEmpty: true },
     },
     required: ['id', 'name', 'drug_id', 'dose', 'date'],

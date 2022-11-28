@@ -5,7 +5,7 @@
 export class VaccinationRequest {
     id: number;
     name: string;
-    drug_id: boolean;
+    drug_id: number;
     dose: number;
     date: string;
 }
