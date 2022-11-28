@@ -62,15 +62,15 @@ describe('Test user controller', () => {
                 password: '123'
             },
         };
-        test('should return a success put a user', async () => {
+        test('should return a success post a login', async () => {
             UserController.loginUser = jest.fn().mockReturnValue(responseTestSuccess);
-            const resp = await request(app).put(`${basePath}login`).send(requestTest);
+            const resp = await request(app).post(`${basePath}login`).send(requestTest);
             expect(resp.body.statusCode).toEqual(EHttpStatus.Success);
         });
 
         test('should return a error', async () => {
             UserController.loginUser = jest.fn().mockRejectedValueOnce('');
-            const resp = await request(app).put(`${basePath}login`).send(requestTest);
+            const resp = await request(app).post(`${basePath}login`).send(requestTest);
             expect(resp.body.statusCode).toEqual(EHttpStatus.RunTimeError);
         });
     });
