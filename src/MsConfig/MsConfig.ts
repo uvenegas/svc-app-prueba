@@ -4,9 +4,9 @@ import { IAppConfig } from './interfaces/IAppConfig';
 import { Environment } from '../Environment/Environment';
 import { AppConfigKeysAndTypes } from '../config/AppConfigKeysAndTypes';
 import dotenv from 'dotenv';
-import { Logger } from 'src/core-node/infrastructure/logger/Logger';
-import { checkObjectContract } from 'src/core-node/infrastructure/utils/utils';
-import { ExceptionError } from 'src/core-node/infrastructure/errors/ExceptionError';
+import { Logger } from '../core-node/infrastructure/logger/Logger';
+import { checkObjectContract } from '../core-node/infrastructure/utils/utils';
+import { ExceptionError } from '../core-node/infrastructure/errors/ExceptionError';
 
 const getConfig = (): IAppConfig => {
     /**

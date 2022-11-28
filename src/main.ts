@@ -2,11 +2,12 @@
  * This import is required in order to allow aliases to work.
  * It needs to be at the top before any other import
  */
+import './config/moduleAliases';
 import { api } from './api';
 import { App } from '@modules/App';
 import { HealthServices } from '@shared/services/HealthServices';
 import { Logger } from '@core/logger/Logger';
-import { MsConfig } from '@msConfig/MsConfig';
+import { MsConfig } from './MsConfig/MsConfig';
 
 /**
  * default port to listen

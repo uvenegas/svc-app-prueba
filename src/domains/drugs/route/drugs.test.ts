@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import express, { Router, Request, Response, NextFunction } from 'express';
 import { DrugsController } from '@domains/drugs/controller/DrugsController';
-import { EHttpStatus } from '@core/enums/EHttpStatus';
 import request from 'supertest';
 import bodyParser from 'body-parser';
 import { DrugsRoutes } from '@domains/drugs/route';
 import { IResponse } from '@core/interfaces/IResponse';
 import { IDrugs } from '@domains/drugs/interface/IDrugs';
+import { EHttpStatus } from '@core/enums/EHttpStatus';
 
 const app = express();
 app.use(bodyParser.json());

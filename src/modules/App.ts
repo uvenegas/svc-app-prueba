@@ -1,5 +1,5 @@
+import { ExceptionError } from '@core/errors/ExceptionError';
 import { MsConfig } from './../MsConfig/MsConfig';
-import { ExceptionError } from 'src/core-node/infrastructure/errors/ExceptionError';
 
 /**
  * It will encapsulate our app logic.

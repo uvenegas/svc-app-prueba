@@ -1,14 +1,14 @@
 import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
-import { MsConfig } from '@msConfig/MsConfig';
-import { UserRoutes } from '@domains/user/route';
+import { MsConfig } from './MsConfig/MsConfig';
+import { UserRoutes } from './domains/user/route';
 import { DrugsRoutes } from '@domains/drugs/route';
 import { VaccinationRoutes } from '@domains/vaccination/route';
-import bodyParserError from 'src/core-node/infrastructure/middleware/bodyParserError.middleware';
-import logTimeResponse from 'src/core-node/infrastructure/middleware/logTimeResponse.middleware';
-import { formatResponse, sendResponse } from 'src/core-node/infrastructure/providers/ErrorHandling/errorHandler';
 import { IResponse } from 'src/core-node/infrastructure/interfaces/IResponse';
-import { EHttpStatus } from 'src/core-node/infrastructure/enums/EHttpStatus';
+import bodyParserError from '@core/middleware/bodyParserError.middleware';
+import logTimeResponse from '@core/middleware/logTimeResponse.middleware';
+import { formatResponse, sendResponse } from '@core/providers/ErrorHandling/errorHandler';
+import { EHttpStatus } from '@core/enums/EHttpStatus';
 
 export const api = express();
 
