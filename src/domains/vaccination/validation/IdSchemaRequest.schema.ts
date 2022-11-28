@@ -5,7 +5,7 @@ import { JSONSchemaType } from 'ajv';
 export const IdSchemaRequest: JSONSchemaType<IdVaccinationRequest> = {
     type: 'object',
     properties: {
-        id: { type: 'number', isNotEmpty: true }
+        id: { type: 'string', isNotEmpty: true }
     },
     required: ['id'],
     errorMessage: {

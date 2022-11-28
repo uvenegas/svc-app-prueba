@@ -95,13 +95,13 @@ describe('Test vaccination controller', () => {
         };
         test('should return a success get a vaccination', async () => {
             VaccinationController.getVaccination = jest.fn().mockReturnValue(responseTestSuccess);
-            const resp = await request(app).get(`${basePath}vaccination/123`);
+            const resp = await request(app).get(`${basePath}vaccination`);
             expect(resp.body.statusCode).toEqual(EHttpStatus.Success);
         });
 
         test('should return a error', async () => {
             VaccinationController.getVaccination = jest.fn().mockRejectedValueOnce('');
-            const resp = await request(app).get(`${basePath}vaccination/123`);
+            const resp = await request(app).get(`${basePath}vaccination`);
             expect(resp.body.statusCode).toEqual(EHttpStatus.RunTimeError);
         });
     });

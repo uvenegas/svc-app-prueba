@@ -100,13 +100,13 @@ describe('Test drugs controller', () => {
         };
         test('should return a success get a drugs', async () => {
             DrugsController.getDrugs = jest.fn().mockReturnValue(responseTestSuccess);
-            const resp = await request(app).get(`${basePath}drugs/123`);
+            const resp = await request(app).get(`${basePath}drugs`);
             expect(resp.body.statusCode).toEqual(EHttpStatus.Success);
         });
 
         test('should return a error', async () => {
             DrugsController.getDrugs = jest.fn().mockRejectedValueOnce('');
-            const resp = await request(app).get(`${basePath}drugs/123`);
+            const resp = await request(app).get(`${basePath}drugs`);
             expect(resp.body.statusCode).toEqual(EHttpStatus.RunTimeError);
         });
     });
@@ -124,7 +124,7 @@ describe('Test drugs controller', () => {
                 avaliable_at: new Date,
             },
         };
-        test('should return a success get a drugs', async () => {
+        test('should return a success delete a drugs', async () => {
             DrugsController.deleteDrugs = jest.fn().mockReturnValue(responseTestSuccess);
             const resp = await request(app).delete(`${basePath}drugs/123`);
             expect(resp.body.statusCode).toEqual(EHttpStatus.Success);

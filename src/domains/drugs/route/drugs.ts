@@ -53,7 +53,7 @@ router
     })
     .delete(`${basePath}drugs/:id`, async (req: Request, resp: Response, next: NextFunction) => {
         try {
-            await validationSchemaMiddleware(req, IdSchemaRequest, ESchemaMiddleware.body);
+            await validationSchemaMiddleware(req, IdSchemaRequest, ESchemaMiddleware.params);
             const idDrugs = Number(req.params.id);
             const drugsResponse = await DrugsController.deleteDrugs(idDrugs);
             const response = formatResponse(EHttpStatus.Success, 'Success', drugsResponse) as IResponse<IDrugs.IResponseDrugs>;
